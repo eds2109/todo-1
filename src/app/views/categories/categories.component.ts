@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { DataHandlerService } from '../../service/data-handler.service';
+import { Category } from '../../model/Category';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
+  categories!: Category[];
 
-  constructor() { }
+  constructor(private DataHandler: DataHandlerService) {}
 
-  ngOnInit(): void {
+  // Метод вызвается автоматически после инициализации компонента
+  ngOnInit() {
+    this.categories = this.DataHandler.getCategories();
+    console.log(this.categories);
   }
-
 }
