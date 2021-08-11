@@ -10,14 +10,16 @@ import { Category } from '../../model/Category';
 export class CategoriesComponent implements OnInit {
   categories!: Category[];
 
-  constructor(private DataHandler: DataHandlerService) {}
+  constructor(private dataHandler: DataHandlerService) {}
 
   // Метод вызвается автоматически после инициализации компонента
   ngOnInit() {
-    this.categories = this.DataHandler.getCategories();
+    this.dataHandler.categoriesSubject.subscribe(
+      (categories) => (this.categories = categories)
+    );
   }
 
   showTasksByCategory(category: Category) {
-    this.DataHandler.fillTasksByCategory(category);
+    this.dataHandler.fillTasksByCategory(category);
   }
 }
